@@ -37,8 +37,18 @@
         </thead>
         <tbody>
         <tr th:each="contact : ${contacts}">
-            <td th:text="${contact.name}"></td>
-            <td th:text="${contact.number}"></td>
+            <td th:text="${contact.getValue().getName()}"></td>
+            <td th:text="${contact.getValue().getNumber()}"></td>
+            <td>
+                <form th:action="@{'/edit{name}'(name=${contact.getValue().getName()})}">
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{'/delete{name}'(name=${contact.getValue().getName()})}" th:method="DELETE">
+                <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
